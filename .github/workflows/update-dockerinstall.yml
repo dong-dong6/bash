@@ -1,0 +1,27 @@
+name: Update dockerinstall.sh
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天执行一次，时间为UTC 00:00
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  update-dockerinstall:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Fetch install.sh from docker/docker-install
+      run: curl -o dockerinstall.sh https://raw.githubusercontent.com/docker/docker-install/main/install.sh
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add dockerinstall.sh
+        git commit -m 'Update dockerinstall.sh from docker/docker-install'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
