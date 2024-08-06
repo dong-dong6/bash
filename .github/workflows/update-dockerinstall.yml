@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Fetch install.sh from docker/docker-install
       run: curl -o dockerinstall.sh https://raw.githubusercontent.com/docker/docker-install/main/install.sh
