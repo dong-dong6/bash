@@ -16,7 +16,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Fetch install.sh from docker/docker-install
-      run: curl -o dockerinstall.sh https://raw.githubusercontent.com/docker/docker-install/main/install.sh
+      run: curl -o dockerinstall.sh https://raw.githubusercontent.com/docker/docker-install/master/install.sh
 
     - name: Commit changes
       run: |
